@@ -1,0 +1,3 @@
+$(function () {
+	// Código jQuery
+});
