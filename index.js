@@ -152,6 +152,7 @@ $(function () {
 	// JS Ej 8
 	$("#ej8").on("click", function () {
 		cadena = prompt("Escribe una frase: ");
+		cadenaInicial = cadena;
 
 		// Elimino espacios y convierto a minúsculas
 		cadena = cadena.replace(/\s/g, "").toLowerCase();
@@ -164,11 +165,11 @@ $(function () {
 		if (cadena === reverso) {
 			codigo = "<h1>El texto es un palíndromo</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>La frase introducida es: '${cadena}'</h3>`, 0.25);
+			alertify.notify(`<h3>La frase introducida es: '${cadenaInicial}'</h3>`, 0.25);
 		} else {
 			codigo = "<h1>El texto no es un palíndromo</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>La frase introducida es: '${cadena}'</h3>`, 0.25);
+			alertify.notify(`<h3>La frase introducida es: '${cadenaInicial}'</h3>`, 0.25);
 		}
 
 		$(".codigo").html(codigo);
