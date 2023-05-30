@@ -1,17 +1,22 @@
+// JQuery
 $(function () {
-	// Código jQuery
+	// JS Ej 17
 	$("#ej17").on("click", function () {
-		$num = prompt("Dame un número: ");
+		$num = prompt("Dame un número");
 
 		let codigo = "";
-
-		for (i = 0; i <= 10; i++) {
-			codigo += `${$num}x` + i + "=" + i * $num + "<br>";
+		if ($num != null) {
+			for (i = 0; i <= 10; i++) {
+				codigo += `${$num}x` + i + "=" + i * $num + "<br>";
+			}
+		} else {
+			alertify.error("<h3>No has introducido ningún número</h3>");
 		}
 
 		$(".codigo").html(codigo);
 	});
 
+	// JS Ej 18
 	$("#ej18").on("click", function () {
 		$num1 = prompt("Dame el primer número: ");
 		$num2 = prompt("Dame el segundo número: ");
@@ -20,25 +25,34 @@ $(function () {
 
 		if ($num1 == $num2) {
 			codigo = "<h1>Son iguales</h1>";
+			alertify.set("notifier", "position", "bottom-center");
+			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`);
 		} else {
 			codigo = "<h1>Son distintos</h1>";
+			alertify.set("notifier", "position", "bottom-center");
+			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`);
 		}
 
 		$(".codigo").html(codigo);
 	});
 
+	// JS Ej 19
 	$("#ej19").on("click", function () {
 		$fechaNacimiento = prompt("Dame tu fecha de nacimiento (DD/MM/AAAA):");
 		$nacimiento = $fechaNacimiento.split("/");
 		$age = 2023 - $nacimiento[2];
 
 		let codigo = "";
-
-		codigo = `<h1>Tienes ${$age} años</h1>`;
+		if ($nacimiento[2] > 2023) {
+			alertify.error("<h3>El año que has introducido es incorrecto</h3>");
+		} else {
+			codigo = `<h1>Tienes ${$age} años</h1>`;
+		}
 
 		$(".codigo").html(codigo);
 	});
 
+	// JS Ej 20
 	$("#ej20").on("click", function () {
 		let codigo = "";
 
@@ -48,16 +62,17 @@ $(function () {
 		$(".codigo").html(codigo);
 
 		document.getElementById("frase1").onclick = function (event) {
-			alert("Has hecho click");
+			alertify.alert("Ejercicio 20 JavaScript", "Has hecho click").set({ transition: "fade" }).show();
 			event.preventDefault();
 		};
 
 		document.getElementById("frase2").ondblclick = function (event) {
-			alert("Has hecho doble click");
+			alertify.alert("Ejercicio 20 JavaScript", "Has hecho doble click").set({ transition: "fade" }).show();
 			event.preventDefault();
 		};
 	});
 
+	// JS Ej 21
 	$("#ej21").on("click", function () {
 		let codigo = `
         <style>
@@ -76,27 +91,31 @@ $(function () {
         <div id="marron" onmouseenter="cambio(this)" onmouseout="cambioB()" style="background-color: brown"></div>`;
 
 		$(".codigo").html(codigo);
+		alertify.set("notifier", "position", "bottom-center");
+		alertify.notify("<h3>Prueba a pasar el ratón por encima de los colores</h3>", 0.5);
 	});
 
+	// JS Ej 3
 	$("#ej3").on("click", function () {
 		let letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E", "T"];
 		let dni = parseInt(prompt("Introduce tu número de DNI: "));
 		let letra = prompt("Introduce la letra de tu DNI: ").toUpperCase();
 
 		if (dni > 99999999 || dni < 0) {
-			alert("El número de DNI no es válido.");
+			alertify.alert("¡Error!", "El número de DNI no es válido.").set({ transition: "fade" }).show();
 		} else {
 			let resto = dni % 23;
 			let letraCalculada = letras[resto];
 
 			if (letra != letraCalculada) {
-				alert("La letra de DNI no es correcta.");
+				alertify.alert("¡Error!", "La letra de DNI no es correcta.").set({ transition: "fade" }).show();
 			} else {
-				alert("El número y la letra de DNI son correctos.");
+				alertify.alert("¡Todo correcto!", "El número y la letra de DNI son correctos.").set({ transition: "fade" }).show();
 			}
 		}
 	});
 
+	// JS Ej 6
 	$("#ej6").on("click", function () {
 		// Array para almacenar las sumas de los lanzamientos
 		let resultados = new Array(11).fill(0);
@@ -127,26 +146,35 @@ $(function () {
 			// Agregar el elemento de párrafo al div de resultados
 			resultado.appendChild(parrafo);
 		}
+		alertify.success("<h3>Tiradas finalizadas</h3>");
 	});
 
+	// JS Ej 8
 	$("#ej8").on("click", function () {
 		cadena = prompt("Escribe una frase: ");
 
+		// Elimino espacios y convierto a minúsculas
 		cadena = cadena.replace(/\s/g, "").toLowerCase();
 
+		// Separo toda la cadena, le doy la vuelta y la vuelvo a unir
 		reverso = cadena.split("").reverse().join("");
 
 		let codigo = "";
 
 		if (cadena === reverso) {
 			codigo = "<h1>El texto es un palíndromo</h1>";
+			alertify.set("notifier", "position", "bottom-center");
+			alertify.notify(`<h3>La frase introducida es: ${cadena}</h3>`, 0.25);
 		} else {
 			codigo = "<h1>El texto no es un palíndromo</h1>";
+			alertify.set("notifier", "position", "bottom-center");
+			alertify.notify(`<h3>La frase introducida es: ${cadena}</h3>`, 0.25);
 		}
 
 		$(".codigo").html(codigo);
 	});
 
+	// JS Ej 10
 	$("#ej10").on("click", function () {
 		let codigo = "";
 
@@ -159,6 +187,7 @@ $(function () {
 		$(".codigo").html(codigo);
 	});
 
+	// JS Ej 2
 	$("#ej2").on("click", function () {
 		let codigo = "";
 
@@ -192,12 +221,12 @@ function cambioB() {
 	fondo.style.backgroundColor = "white";
 }
 
-// Funciones Ejercicio 10
+// Funcion Ejercicio 10
 function evento(pais, capital) {
-	alert(`La capital de ${pais} es ${capital}.`);
+	alertify.alert("Ejercicio 10 JavaScript", `La capital de ${pais} es ${capital}.`).set({ transition: "fade" }).show();
 }
 
-// Funciones Ejercicio 2
+// Funcion Ejercicio 2
 function mostrarSaludo() {
 	const nombre = document.getElementById("nombre").value;
 	const horaActual = new Date().getHours();
@@ -212,4 +241,5 @@ function mostrarSaludo() {
 	}
 
 	document.getElementById("saludo").textContent = saludo;
+	alertify.success("<h3>Saludo completado</h3>");
 }
