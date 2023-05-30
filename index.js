@@ -26,11 +26,11 @@ $(function () {
 		if ($num1 == $num2) {
 			codigo = "<h1>Son iguales</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`);
+			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
 		} else {
 			codigo = "<h1>Son distintos</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`);
+			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
 		}
 
 		$(".codigo").html(codigo);
@@ -164,11 +164,11 @@ $(function () {
 		if (cadena === reverso) {
 			codigo = "<h1>El texto es un palíndromo</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>La frase introducida es: ${cadena}</h3>`, 0.25);
+			alertify.notify(`<h3>La frase introducida es: '${cadena}'</h3>`, 0.25);
 		} else {
 			codigo = "<h1>El texto no es un palíndromo</h1>";
 			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>La frase introducida es: ${cadena}</h3>`, 0.25);
+			alertify.notify(`<h3>La frase introducida es: '${cadena}'</h3>`, 0.25);
 		}
 
 		$(".codigo").html(codigo);
