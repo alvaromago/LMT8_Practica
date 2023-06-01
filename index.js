@@ -18,19 +18,22 @@ $(function () {
 
 	// JS Ej 18
 	$("#ej18").on("click", function () {
-		$num1 = prompt("Dame el primer número: ");
-		$num2 = prompt("Dame el segundo número: ");
+		$num1 = prompt("Dame el primer número: ").valueOf();
+		$num2 = prompt("Dame el segundo número: ").valueOf();
 
 		let codigo = "";
-
-		if ($num1 == $num2) {
-			codigo = "<h1>Son iguales</h1>";
-			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
+		if (isNaN($num1) || isNaN($num2) || $num1 === "" || $num2 === "") {
+			alertify.error("<h3>No has introducido ningún número</h3>");
 		} else {
-			codigo = "<h1>Son distintos</h1>";
-			alertify.set("notifier", "position", "bottom-center");
-			alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
+			if ($num1 == $num2) {
+				codigo = "<h1>Son iguales</h1>";
+				alertify.set("notifier", "position", "bottom-center");
+				alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
+			} else {
+				codigo = "<h1>Son distintos</h1>";
+				alertify.set("notifier", "position", "bottom-center");
+				alertify.notify(`<h3>Los números eran ${$num1} y ${$num2}</h3>`, 0.25);
+			}
 		}
 
 		$(".codigo").html(codigo);
@@ -39,8 +42,11 @@ $(function () {
 	// JS Ej 19
 	$("#ej19").on("click", function () {
 		$fechaNacimiento = prompt("Dame tu fecha de nacimiento (DD/MM/AAAA):");
-		$nacimiento = $fechaNacimiento.split("/");
-		$age = 2023 - $nacimiento[2];
+		$nacimientoArr = $fechaNacimiento.split("/");
+		$nacimiento = new Date($nacimientoArr[2], $nacimientoArr[1] - 1, $nacimientoArr[0]);
+		$ageDif = Date.now() - $nacimiento.getTime();
+		$age = new Date($ageDif);
+		$age = Math.abs($age.getUTCFullYear() - 1970);
 
 		let codigo = "";
 		if ($nacimiento[2] > 2023) {
@@ -101,7 +107,7 @@ $(function () {
 		let dni = parseInt(prompt("Introduce tu número de DNI: "));
 		let letra = prompt("Introduce la letra de tu DNI: ").toUpperCase();
 
-		if (dni > 99999999 || dni < 0) {
+		if (dni > 99999999 || dni < 0 || dni === null || isNaN(dni)) {
 			alertify.alert("¡Error!", "El número de DNI no es válido.").set({ transition: "fade" }).show();
 		} else {
 			let resto = dni % 23;
@@ -129,24 +135,16 @@ $(function () {
 			// Incrementar el contador correspondiente en el array de resultados
 			resultados[suma - 2]++;
 		}
-
-		// Mostrar los resultados de las sumas
-		let resultado = document.getElementsByClassName("codigo")[0];
+		let codigo = ``;
 
 		// Mostrar los resultados de las sumas
 		for (let j = 0; j < resultados.length; j++) {
 			let suma = j + 2;
 			let apariciones = resultados[j];
-			let mensaje = "Suma " + suma + ": " + apariciones + " apariciones";
-
-			// Crear un elemento de párrafo y agregar el mensaje
-			let parrafo = document.createElement("p");
-			parrafo.textContent = mensaje;
-
-			// Agregar el elemento de párrafo al div de resultados
-			resultado.appendChild(parrafo);
+			codigo += `Suma ${suma}: ${apariciones} apariciones<br>`;
 		}
 		alertify.success("<h3>Tiradas finalizadas</h3>");
+		$(".codigo").html(codigo);
 	});
 
 	// JS Ej 8
